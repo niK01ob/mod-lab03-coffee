@@ -40,16 +40,16 @@ TEST(AutomataTest, InsertCoin) {
     a.on();
     a.coin(5);
     ASSERT_EQ(STATES::ACCEPT, a.getState());
-    ASSERT_EQ(50, a.getCash());
+    ASSERT_EQ(5, a.getCash());
 }
 
 TEST(AutomataTest, CoinAndCancel) {
     Automata a = Automata();
     a.on();
-    a.coin(50);
+    a.coin(5);
     a.cancel();
     ASSERT_EQ(STATES::WAIT, a.getState());
-    ASSERT_EQ(50, a.getCash());
+    ASSERT_EQ(5, a.getCash());
 }
 
 TEST(AutomataTest, ChooseWithoutCoins) {
@@ -72,7 +72,6 @@ TEST(AutomataTest, CorrectChoice) {
     a.on();
     a.coin(40);
     a.choice("Americano");
-    a.change();
     ASSERT_EQ(STATES::WAIT, a.getState());
     ASSERT_EQ(10, a.getCash());
 }
@@ -92,7 +91,7 @@ TEST(AutomataTest, SwitchOffWhenAccept) {
     a.coin(5);
     a.off();
     ASSERT_EQ(STATES::ACCEPT, a.getState());
-    ASSERT_EQ(100, a.getCash());
+    ASSERT_EQ(5, a.getCash());
 }
 
 TEST(AutomataTest, MainScenario) {
