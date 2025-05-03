@@ -1,3 +1,5 @@
+// Copyright 2022 UNN-IASR
+
 #include "Automata.h"
 
 #include <iostream>
@@ -7,8 +9,7 @@ void Automata::on() {
     if (state == OFF) {
         state = WAIT;
         getState();
-    }
-    else {
+    } else {
         std::cout << "Already working" << std::endl;
     }
 }
@@ -18,11 +19,8 @@ void Automata::off() {
         change();
         state = OFF;
         getState();
-    }
-    else {
-        if (state != OFF) {
-            std::cout << "Wait, machine working now" << std::endl;
-        }
+    } else if (state != OFF) {
+        std::cout << "Wait, machine working now" << std::endl;
     }
 }
 
@@ -31,8 +29,7 @@ void Automata::coin(int money) {
         cash += money;
         state = ACCEPT;
         getState();
-    }
-    else {
+    } else {
         std::cout << "Incorrect action" << std::endl;
     }
 }
@@ -53,8 +50,7 @@ void Automata::choice(std::string drink) {
         if (find(menu.begin(), menu.end(), drink) == menu.end()) {
             std::cout << "Drink not from menu" << std::endl;
             cancel();
-        }
-        else {
+        } else {
             state = CHECK;
             getState();
             check(drink);
@@ -89,13 +85,11 @@ void Automata::check(std::string drink) {
         if (cash < priceOfCoffee) {
             std::cout << "Cash is so small" << std::endl;
             cancel();
-        }
-        else {
+        } else {
             cash -= priceOfCoffee;
             cook();
         }
-    }
-    else {
+    } else {
         std::cout << "Ivalid state" << std::endl;
     }
 }
@@ -107,7 +101,9 @@ void Automata::cook() {
     auto printingState = std::chrono::seconds(2);
     state = COOK;
     while (std::chrono::steady_clock::now() - start < duration) {
-        if (std::chrono::steady_clock::now() - start == printingState) getState();
+        if (std::chrono::steady_clock::now() - start == printingState) {
+            getState();
+        }
     }
     std::cout << "Done!" << std::endl;
     finish();

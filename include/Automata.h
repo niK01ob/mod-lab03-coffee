@@ -4,13 +4,15 @@
 #include <algorithm>
 #include <chrono>
 #include <iostream>
+// Copyright 2022 UNN-IASR
+
 #include <string>
 #include <vector>
 
 enum STATES { OFF, WAIT, ACCEPT, CHECK, COOK };
 
 class Automata {
-public:
+ public:
     Automata() {
         cash = 0;
         state = OFF;
@@ -28,7 +30,7 @@ public:
     int getCash();
     void change();
 
-private:
+ private:
     void check(std::string drink);
     void cook();
     void finish();
